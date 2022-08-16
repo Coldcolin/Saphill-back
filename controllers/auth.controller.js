@@ -14,11 +14,20 @@ const cloudinary = require("../config/cloudinary")
 const getUser = async (req, res) => {
     try {
     const user = await User.findById(req.user.id).select('-password')
-    res.json(user)
+    res.status(200).json(user)
     } catch (error) {
-    console.log(err.message);
+    console.log(error.message);
     res.status(500).send('Server Error')
 }};
+
+const getAllUsers = async (req, res)=>{
+    try{
+        const users = await User.find();
+        res.status(200).json(users)
+    }catch(error){
+        res.status(500).send('Server Error')
+    }
+}
 
 const signUp = async(req, res, next)=>{
     try {
@@ -210,6 +219,7 @@ module.exports = {
     addCategory,
     getAllCat,
     getAllProducts,
+    getAllUsers,
     getSingleProducts,
     getProductsForAdmin,
     deleteUser,
