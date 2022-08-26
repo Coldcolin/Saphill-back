@@ -120,7 +120,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage}).single("image")
 
-const add = async (req, res)=>{
+const add = async (req, res, next)=>{
     const { name, price,description, quantity } = req.body;
     const result = await cloudinary.uploader.upload(req.file.path)
     const id = req.params.id;
@@ -147,7 +147,8 @@ const add = async (req, res)=>{
             res.status(400).json({message: "You don't have permission to add items"})
         }
     }catch(error){
-        res.status(400).json({message: "You don't have have the permission to carry out this task"})
+        res.status(400).json({message: "You don't have have the permission to carry out this task"});
+        next(error)
     }
 }
 
