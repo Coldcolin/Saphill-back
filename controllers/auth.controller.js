@@ -128,24 +128,38 @@ const add = async (req, res, next)=>{
     const cate = await Category.findById(catId);
     const adminUser = await User.findById(id);
     try{
-        if(req.user.isAdmin){
-            const createStore = await Products({
-                name,
-                price,
-                description,
-                quantity,
-                image: result.secure_url,
-                cloudPath: result.public_id
-            })
-            createStore.user = adminUser;
-            createStore.category = cate;
-            createStore.save();
-            adminUser.products.push(createStore);
-            adminUser.save();
-            res.status(200).json({message: "Item Created"})
-        }else{
-            res.status(400).json({message: "You don't have permission to add items"})
-        }
+        const createStore = await Products({
+            name,
+            price,
+            description,
+            quantity,
+            image: result.secure_url,
+            cloudPath: result.public_id
+        })
+        createStore.user = adminUser;
+        createStore.category = cate;
+        createStore.save();
+        adminUser.products.push(createStore);
+        adminUser.save();
+        res.status(200).json({message: "Item Created"})
+        // if(req.user.isAdmin){
+        //     const createStore = await Products({
+        //         name,
+        //         price,
+        //         description,
+        //         quantity,
+        //         image: result.secure_url,
+        //         cloudPath: result.public_id
+        //     })
+        //     createStore.user = adminUser;
+        //     createStore.category = cate;
+        //     createStore.save();
+        //     adminUser.products.push(createStore);
+        //     adminUser.save();
+        //     res.status(200).json({message: "Item Created"})
+        // }else{
+        //     res.status(400).json({message: "You don't have permission to add items"})
+        // }
     }catch(error){
         res.status(400).json({message: "You don't have have the permission to carry out this task"});
         next(error)
