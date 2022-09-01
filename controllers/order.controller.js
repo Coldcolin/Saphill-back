@@ -7,7 +7,9 @@ const addOrder = async (req, res, next)=>{
             Address: req.body.Address,
             products: req.body.products,
             Gross: req.body.Gross,
-            phone: req.body.phone
+            phone: req.body.phone,
+            company: req.body.company,
+            Admin: req.body.Admin
         });
         res.json(200).json({newOrder});
     }catch(err){
