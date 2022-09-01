@@ -11,7 +11,7 @@ const addOrder = async (req, res, next)=>{
             company: req.body.company,
             Admin: req.body.Admin
         });
-        res.json(200).json({newOrder});
+        res.json(200).json({data: newOrder});
     }catch(err){
         next(err)
         res.json({error: err.message})
