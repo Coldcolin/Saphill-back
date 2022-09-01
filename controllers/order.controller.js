@@ -39,10 +39,29 @@ const deleteOrder = async (req, res)=>{
     }
 };
 
+const getAllOrders = async (req, res, next) =>{
+    try{
+        const allOrders = await Order.find();
+        res.status(200).json({data: allOrders})
+    }catch(err){
+        next(err)
+    }
+}
+const getOneOrder = async (req, res, next) =>{
+    try{
+        const Id = req.params.id
+        const oneOrder = await Order.findById(Id);
+        res.status(200).json({data: oneOrder})
+    }catch(err){
+        next(err)
+    }
+}
 
 
 module.exports = {
     addOrder,
     updateOrder,
-    deleteOrder
+    deleteOrder,
+    getAllOrders,
+    getOneOrder
 }

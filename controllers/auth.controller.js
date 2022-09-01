@@ -222,6 +222,14 @@ const deleteUser = async (req, res)=>{
     res.status(500).json(err);
     }
 };
+const deleteProduct = async (req, res)=>{
+    try {
+        await Products.findByIdAndDelete(req.params.id);
+        res.status(200).json("Product has been deleted...");
+    } catch (err) {
+    res.status(500).json(err);
+    }
+};
 
 
 module.exports = {
@@ -238,4 +246,5 @@ module.exports = {
     getSingleProducts,
     getProductsForAdmin,
     deleteUser,
+    deleteProduct
 }
