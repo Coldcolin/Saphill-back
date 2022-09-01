@@ -14,7 +14,7 @@ const addOrder = async (req, res, next)=>{
         res.json(200).json({newOrder});
     }catch(err){
         next(err)
-        res.json({err.message})
+        res.json({error: err.message})
     }
 };
 
