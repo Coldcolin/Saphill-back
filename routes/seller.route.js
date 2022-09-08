@@ -13,6 +13,7 @@ const {
 
 router.get("/Product/:id", getProductsForSeller);
 router.post("/Create", uploads, createSeller);
+router.post("/login", login);
 router.get("/all", getSellers);
 router.get("/one/:id", getSingleSeller);
 router.post("/create/:id/:catId", uploads, addProduct);
