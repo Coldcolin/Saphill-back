@@ -11,7 +11,6 @@ const sellerSchema = new mongoose.Schema({
     cityTown: {type: String, required: true},
     stateCountry: {type: String, required: true},
     password: {type: String, required: true},
-    document: {type: String, required: true},
     storePhone:{type: Number, required: true},
     postCode: {type: Number, required: true},
     productType: {type: String, required: true},

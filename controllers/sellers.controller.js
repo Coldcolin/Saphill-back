@@ -10,7 +10,6 @@ const cloudinary = require("../config/cloudinary")
 
 const createSeller = async(req, res, next) =>{
     try{
-        const results = await cloudinary.uploader.upload(req.file.path)
         let checkUser = await sellers.findOne({email: req.body.email});
         if (checkUser) {
             return res.status(400).json({
@@ -34,7 +33,6 @@ const createSeller = async(req, res, next) =>{
             postCode: req.body.postCode,
             productType: req.body.productType,
             password: hashPassword,
-            document: results.secure_url
         });
 
 		res.status(201).json({ message: "Success" , data: newSeller});
